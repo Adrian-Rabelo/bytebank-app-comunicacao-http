@@ -1,16 +1,24 @@
-# bytebank
+# Bytebank
 
-A new Flutter project.
+Formação Alura em Flutter
 
-## Getting Started
+**Bytebank** é um projeto criado em Flutter para ministrar as aulas da Formação de Flutter na Alura
 
-This project is a starting point for a Flutter application.
+---
+O Repositório está dividido em branches onde cada uma representa o curso de cada formação.
+## Clonando o projeto
 
-A few resources to get you started if this is your first Flutter project:
+Para clonar o projeto \
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+**1º** ➝ Crie uma pasta e entre nela
+```
+mkdir bytebank
+cd bytebank
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**2º** ➝ Clone o projeto \
+```
+git clone https://github.com/Adrian-Rabelo/bytebank-app.git
+```
+
+---
