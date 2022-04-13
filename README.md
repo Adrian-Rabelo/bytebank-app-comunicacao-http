@@ -18,7 +18,7 @@ cd bytebank
 
 **2º** ➝ Clone o projeto \
 ```
-git clone https://github.com/Adrian-Rabelo/bytebank-app.git
+git clone git@github.com:Adrian-Rabelo/bytebank-app-persistencia-dados.git
 ```
 
 ---
