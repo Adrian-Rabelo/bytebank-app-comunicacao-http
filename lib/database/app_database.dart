@@ -8,7 +8,7 @@ void createDatabase() {
     openDatabase(path, onCreate: (db, version) {
       db.execute('CREATE TABLE contacts('
           'id INTEGER PRIMARY KEY,'
-          'name TEXT'
+          'name TEXT, '
           'account_number INTEGER)');
     }, version: 1);
   });
