@@ -8,7 +8,7 @@ class ContactsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.green[800],
         title: const Text('Contacts'),
       ),
       body: ListView(
