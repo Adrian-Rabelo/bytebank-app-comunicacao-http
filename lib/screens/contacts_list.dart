@@ -13,10 +13,10 @@ class ContactsList extends StatelessWidget {
         backgroundColor: Colors.green[800],
         title: const Text('Contacts'),
       ),
-      body: FutureBuilder(
-        future: findAll(),
+      body: FutureBuilder<List<Contact>>(
+        initialData: [],
+        future: Future.delayed(const Duration(seconds: 1)).then((value) => findAll()),
         builder: (context, snapshot) {
-          if (snapshot.data != null) {
             final List<Contact> contacts = snapshot.data as List<Contact>;
             return ListView.builder(
               itemBuilder: (context, index) {
@@ -25,9 +25,16 @@ class ContactsList extends StatelessWidget {
               },
               itemCount: contacts.length,
             );
-          } else {
-            return const Card();
-          }
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                CircularProgressIndicator(),
+                Text('Loading')
+              ],
+            ),
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(

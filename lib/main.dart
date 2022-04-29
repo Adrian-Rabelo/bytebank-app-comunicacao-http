@@ -8,8 +8,8 @@ import 'screens/contacts_list.dart';
 
 void main() {
   runApp(const BytebankApp());
-  // save(Contact(0, 'Fran', 1000));
-  findAll().then((contacts) => debugPrint(contacts.toString()));
+  // save(Contact(0, 'Fran', 1000));  // salvar contato
+  // findAll().then((contacts) => debugPrint(contacts.toString())); // listar contatos
 }
 
 class BytebankApp extends StatelessWidget {
