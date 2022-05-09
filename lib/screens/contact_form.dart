@@ -1,14 +1,17 @@
 import 'package:bytebank/models/contact.dart';
 import 'package:flutter/material.dart';
 
+import '../database/app_database.dart';
+
 class ContactForm extends StatefulWidget {
+  const ContactForm({Key? key}) : super(key: key);
+
 
   @override
   State<ContactForm> createState() => _ContactFormState();
 }
 
 class _ContactFormState extends State<ContactForm> {
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountNumberController = TextEditingController();
 
@@ -49,8 +52,7 @@ class _ContactFormState extends State<ContactForm> {
                     final String name = _nameController.text;
                     final int? accountNumber = int.tryParse(_accountNumberController.text);
                     final Contact newContact = Contact(0, name, accountNumber!);
-
-                    Navigator.pop(context, newContact);
+                    save(newContact).then((id) => Navigator.pop(context));
                   },
                   child: const Text('Create'),
                 ),
