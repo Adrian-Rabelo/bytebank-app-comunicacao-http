@@ -19,17 +19,23 @@ class Dashboard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset('images/bytebank_logo.png'),
           ),
-          Row(
-            children: const [
-              _FeatureItem(
-                name: 'Transfer',
-                icon: Icons.monetization_on,
-              ),
-              _FeatureItem(
-                name: 'Transaction Feed',
-                icon: Icons.description,
-              ),
-            ],
+          Container(
+            height: 110,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                _FeatureItem(
+                  name: 'Transfer',
+                  icon: Icons.monetization_on,
+                  onClick: () => _showContactsList(context),
+                ),
+                _FeatureItem(
+                  name: 'Transaction Feed',
+                  icon: Icons.description,
+                  onClick: () => print('transaction feed was clicked'),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -38,11 +44,12 @@ class Dashboard extends StatelessWidget {
 }
 
 class _FeatureItem extends StatelessWidget {
-  const _FeatureItem({Key? key, required this.name, required this.icon})
+  const _FeatureItem({Key? key, required this.name, required this.icon, required this.onClick})
       : super(key: key);
 
   final String name;
   final IconData icon;
+  final Function? onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +58,9 @@ class _FeatureItem extends StatelessWidget {
       child: Material(
         color: Colors.green[900],
         child: InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const ContactsList(),
-              ),
-            );
-          },
+          onTap: () => onClick!(),
           child: Container(
             padding: const EdgeInsets.all(8.0),
-            height: 100,
             width: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,4 +85,12 @@ class _FeatureItem extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showContactsList(BuildContext context) {
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => const ContactsList(),
+    ),
+  );
 }
