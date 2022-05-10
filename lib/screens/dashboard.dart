@@ -49,8 +49,8 @@ class _FeatureItem extends StatelessWidget {
       {Key? key, required this.name, required this.icon, required this.onClick})
       : super(key: key);
 
-  final String name;
-  final IconData icon;
+  final String? name;
+  final IconData? icon;
   final Function? onClick;
 
   @override
@@ -69,12 +69,12 @@ class _FeatureItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Icon(
-                  icon,
+                  icon!,
                   color: Colors.white,
                   size: 32.0,
                 ),
                 Text(
-                  name,
+                  name!,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
