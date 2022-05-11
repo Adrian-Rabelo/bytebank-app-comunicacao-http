@@ -31,9 +31,12 @@ Future<List<Transaction>> findAll() async {
       LoggingInterceptor(),
     ],
   );
-  final Response response =
-      await client.get(Uri.parse('http://192.168.0.141:8080/transactions')); // casa
-      // await client.get(Uri.parse('http://172.22.4.121:8080/transactions')); // tj
+  final Response response = await client
+      .get(Uri.parse('http://192.168.0.141:8080/transactions'))
+      .timeout(const Duration(seconds: 5)); // casa
+  // await client
+  //.get(Uri.parse('http://172.22.4.121:8080/transactions'))
+  //.timeout(const Duration(seconds: 5)); // tj
   final List<dynamic> decodedJson = jsonDecode(response.body);
   final List<Transaction> transactions = [];
   for (Map<String, dynamic> transactionJson in decodedJson) {
