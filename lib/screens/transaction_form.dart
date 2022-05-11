@@ -1,4 +1,4 @@
-import 'package:bytebank/http/webclient.dart';
+import 'package:bytebank/http/webclients/transaction_webclient.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
+  final TransactionWebClient _webClient = TransactionWebClient();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +29,7 @@ class _TransactionFormState extends State<TransactionForm> {
             children: [
               Text(
                 widget.contact!.name,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24.0,
                 ),
               ),
@@ -36,7 +37,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Text(
                   widget.contact!.accountNumber.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 32.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -46,9 +47,9 @@ class _TransactionFormState extends State<TransactionForm> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: TextField(
                   controller: _valueController,
-                  style: TextStyle(fontSize: 24.0),
-                  decoration: InputDecoration(labelText: 'Value'),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  style: const TextStyle(fontSize: 24.0),
+                  decoration: const InputDecoration(labelText: 'Value'),
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
               Padding(
@@ -62,7 +63,7 @@ class _TransactionFormState extends State<TransactionForm> {
                             double.tryParse(_valueController.text);
                         final transactionCreated =
                             Transaction(value!, widget.contact!);
-                        save(transactionCreated).then((transaction) {
+                        _webClient.save(transactionCreated).then((transaction) {
                           Navigator.pop(context);
                         });
                       },
