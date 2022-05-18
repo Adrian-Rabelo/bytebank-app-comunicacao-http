@@ -6,19 +6,22 @@ Formação Alura em Flutter
 
 ---
 O Repositório está dividido em branches onde cada uma representa o curso de cada formação.
+
 ## Clonando o projeto
 
-Para clonar o projeto \
+Para clonar o projeto
 
 **1º** ➝ Crie uma pasta e entre nela
-```
+
+```bash
 mkdir bytebank
 cd bytebank
 ```
 
-**2º** ➝ Clone o projeto \
-```
-git clone git@github.com:Adrian-Rabelo/bytebank-app-persistencia-dados.git
+**2º** ➝ Clone o projeto
+
+```bash
+git clone git@github.com:Adrian-Rabelo/bytebank-app-flutter-comunicacao-web.git
 ```
 
 ---
