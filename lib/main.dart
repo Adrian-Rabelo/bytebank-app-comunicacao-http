@@ -1,6 +1,8 @@
 import 'package:bytebank/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
+import 'components/transaction_auth_dialog.dart';
+
 void main() {
   runApp(const BytebankApp());
   // save(Transaction(200.0, Contact(0, 'Gui', 2000)))
@@ -27,7 +29,7 @@ class BytebankApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: const Dashboard(),
+      home: TransactionAuthDialog(),
     );
   }
 }
