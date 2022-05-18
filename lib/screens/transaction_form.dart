@@ -61,10 +61,10 @@ class _TransactionFormState extends State<TransactionForm> {
                   child: ElevatedButton(
                     child: const Text('Transfer'),
                     onPressed: () {
-                      final double? value =
-                          double.tryParse(_valueController.text);
+                      final double value =
+                          double.tryParse(_valueController.text) ?? 0;
                       final transactionCreated =
-                          Transaction(value!, widget.contact!);
+                          Transaction(value, widget.contact!);
                       showDialog(
                         context: context,
                         builder: (contextDialog) => TransactionAuthDialog(
@@ -93,6 +93,8 @@ class _TransactionFormState extends State<TransactionForm> {
       (transaction) {
         Navigator.pop(context);
       },
-    );
+    ).catchError((e) {
+      print(e);
+    });
   }
 }
