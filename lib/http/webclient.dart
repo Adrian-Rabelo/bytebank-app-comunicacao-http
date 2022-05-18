@@ -8,4 +8,4 @@ final Client client = InterceptedClient.build(
   ],
 );
 
-const String baseUrl = 'http://{ip_maquina}:8080/transactions';
+const String baseUrl = 'http://192.168.0.141:8080/transactions';
