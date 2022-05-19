@@ -1,3 +1,4 @@
+import 'package:bytebank/components/response_dialog.dart';
 import 'package:bytebank/components/transaction_auth_dialog.dart';
 import 'package:bytebank/http/webclients/transaction_webclient.dart';
 import 'package:bytebank/models/contact.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 class TransactionForm extends StatefulWidget {
   const TransactionForm(this.contact, {Key? key}) : super(key: key);
 
-  final Contact? contact;
+  final Contact contact;
 
   @override
   _TransactionFormState createState() => _TransactionFormState();
@@ -29,7 +30,7 @@ class _TransactionFormState extends State<TransactionForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.contact!.name,
+                widget.contact.name,
                 style: const TextStyle(
                   fontSize: 24.0,
                 ),
@@ -37,7 +38,7 @@ class _TransactionFormState extends State<TransactionForm> {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Text(
-                  widget.contact!.accountNumber.toString(),
+                  widget.contact.accountNumber.toString(),
                   style: const TextStyle(
                     fontSize: 32.0,
                     fontWeight: FontWeight.bold,
@@ -61,10 +62,10 @@ class _TransactionFormState extends State<TransactionForm> {
                   child: ElevatedButton(
                     child: const Text('Transfer'),
                     onPressed: () {
-                      final double value =
-                          double.tryParse(_valueController.text) ?? 0;
+                      final double? value =
+                          double.tryParse(_valueController.text);
                       final transactionCreated =
-                          Transaction(value, widget.contact!);
+                          Transaction(value ?? 0, widget.contact);
                       showDialog(
                         context: context,
                         builder: (contextDialog) => TransactionAuthDialog(
@@ -91,10 +92,19 @@ class _TransactionFormState extends State<TransactionForm> {
   ) async {
     _webClient.save(transactionCreated, password).then(
       (transaction) {
-        Navigator.pop(context);
+        showDialog(
+            context: context,
+            builder: (contextDialog) {
+              return const SuccessDialog('successul transaction');
+            }).then((value) => Navigator.pop(context));
       },
     ).catchError((e) {
-      print(e);
-    });
+      showDialog(
+        context: context,
+        builder: (contextDialog) {
+          return FailureDialog(e.message);
+        },
+      );
+    }, test: (e) => e is Exception);
   }
 }
