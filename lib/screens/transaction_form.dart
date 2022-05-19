@@ -6,6 +6,7 @@ import 'package:bytebank/http/webclients/transaction_webclient.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm(this.contact, {Key? key}) : super(key: key);
@@ -19,8 +20,11 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
   final TransactionWebClient _webClient = TransactionWebClient();
+  final String transactionId = Uuid().v4();
+
   @override
   Widget build(BuildContext context) {
+    print('transaction form id -> $transactionId');
     return Scaffold(
       appBar: AppBar(
         title: const Text('New transaction'),
@@ -66,8 +70,11 @@ class _TransactionFormState extends State<TransactionForm> {
                     onPressed: () {
                       final double? value =
                           double.tryParse(_valueController.text);
-                      final transactionCreated =
-                          Transaction(value ?? 0, widget.contact);
+                      final transactionCreated = Transaction(
+                        transactionId,
+                        value ?? 0,
+                        widget.contact,
+                      );
                       showDialog(
                         context: context,
                         builder: (contextDialog) => TransactionAuthDialog(
@@ -98,14 +105,12 @@ class _TransactionFormState extends State<TransactionForm> {
   }
 
   void _showSuccessfulMessage(Transaction transaction, BuildContext context) {
-    if (transaction != null) {
-      showDialog(
-          context: context,
-          builder: (contextDialog) {
-            return const SuccessDialog('successul transaction');
-          });
-      Navigator.pop(context);
-    }
+    showDialog(
+        context: context,
+        builder: (contextDialog) {
+          return const SuccessDialog('successful transaction');
+        });
+    Navigator.pop(context);
   }
 
   Future<Transaction> _send(Transaction transactionCreated, String password,
